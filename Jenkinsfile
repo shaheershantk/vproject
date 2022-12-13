@@ -38,7 +38,7 @@ pipeline {
 
 	stage('INTEGRATION TEST'){
             steps {
-                sh 'mvn -s settings.xml verify -DskipUnitTests'
+                sh 'mvn -s settings.xml verify -DskipTests'
             }
         }
 		
