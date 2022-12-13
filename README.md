@@ -12,7 +12,7 @@
 - JSP
 - MySQL
 ### Database
-Here,we used Mysql Database
+Here,we used Mysql Database DB
 MSQL DB Installation Steps for Linux ubuntu 14.04:
 - $ sudo apt-get update
 - $ sudo apt-get install mysql-server
