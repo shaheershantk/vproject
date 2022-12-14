@@ -25,6 +25,7 @@ pipeline {
         
         stage('BUILD'){
             steps {
+                
                 sh 'mvn -s settings.xml clean install -DskipTests'
             }
             post {
@@ -72,6 +73,13 @@ pipeline {
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push('latest')
                     }
+                }
+            }
+        }
+        stage('Show username and password') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'ecr:ap-south-1:awscreds', passwordVariable: 'password', usernameVariable: 'user')]) {
+                  echo 'Username is' $user  
                 }
             }
         }
