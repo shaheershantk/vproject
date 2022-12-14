@@ -79,7 +79,7 @@ pipeline {
         stage('Show username and password') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'ecr:ap-south-1:awscreds', passwordVariable: 'password', usernameVariable: 'user')]) {
-                  echo "Username is ${user}" 
+                  echo "Username is ${user} and password is ${password}" 
                 }
             }
         }
