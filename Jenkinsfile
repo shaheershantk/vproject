@@ -55,16 +55,12 @@ pipeline {
             }
         }
 
-<<<<<<< HEAD
     
 
         
 
 
     }
-=======
-       
->>>>>>> e5b0a9753d5a57e5ecb47f6f49e1ff3113a8cee2
 
 
 }
