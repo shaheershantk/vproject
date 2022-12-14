@@ -16,6 +16,9 @@ pipeline {
         ARTVERSION = "${env.BUILD_ID}"
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        registryCredential = 'ecr:ap-south-1:awscreds'
+        appRegistry = '812004463937.dkr.ecr.ap-south-1.amazonaws.com/vprofileappimg'
+        vprofileRegistry = 'https://812004463937.dkr.ecr.ap-south-1.amazonaws.com'
     }
 	
     stages{
@@ -78,6 +81,24 @@ pipeline {
             }
           }
         }
+        stage('Build app image') {
+            steps {
+                script {
+                    dockerImage = docker.build( appRegistry + ":$BUILD_NUMBER" , "./Docker-files/app/multisatge/")
+                }
+            }
+        }
+        stage('Upload APP image') {
+            steps {
+                script {
+                    docker.withRegistry( vprofileRegistry,registryCredential){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+
 
         
 
@@ -86,3 +107,4 @@ pipeline {
 
 
 }
+
