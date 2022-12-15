@@ -17,7 +17,7 @@ pipeline {
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
         //registryCredential = 'ecr:ap-south-1:awscreds'
-        regcred = "${registryCredential}" //saved as secret key in jenkins
+        regcredential = 'registryCredential' 
         appRegistry = '812004463937.dkr.ecr.ap-south-1.amazonaws.com/vprofileappimg' //uri repo name created in ecr
         vprofileRegistry = 'https://812004463937.dkr.ecr.ap-south-1.amazonaws.com'   //https without repo name for docker login
     }
@@ -79,7 +79,7 @@ pipeline {
         }
         stage('Show username and password') {
             steps {
-                withCredentials([usernamePassword(credentialsId: regcred, passwordVariable: 'password', usernameVariable: 'user')]) {
+                withCredentials([usernamePassword(credentialsId: "$registryCredential", passwordVariable: 'password', usernameVariable: 'user')]) {
                   echo "Username is ${user} and password is ${password}" 
                 }
             }
