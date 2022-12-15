@@ -17,7 +17,7 @@ pipeline {
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
         //registryCredential = 'ecr:ap-south-1:awscreds'
-        regcred = "$registryCredential"
+        regcred = "${registryCredential}" //saved as secret key in jenkins
         appRegistry = '812004463937.dkr.ecr.ap-south-1.amazonaws.com/vprofileappimg' //uri repo name created in ecr
         vprofileRegistry = 'https://812004463937.dkr.ecr.ap-south-1.amazonaws.com'   //https without repo name for docker login
     }
