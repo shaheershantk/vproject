@@ -20,6 +20,7 @@ pipeline {
         appRegistry = '812004463937.dkr.ecr.ap-south-1.amazonaws.com/vprofileappimg' //uri repo name created in ecr
         cluster = 'vprostaging'
         service = 'vproappstagesvc'
+        region = 'ap-south-1'
         vprofileRegistry = 'https://812004463937.dkr.ecr.ap-south-1.amazonaws.com'   //https without repo name for docker login
     }
 
@@ -81,7 +82,7 @@ pipeline {
         }
         stage('Deploying to ECS') {
             steps {
-                withAWS(credentials: 'awscreds', region: 'ap-south-1'){
+                withAWS(credentials: 'awscreds', region: "$region"){
                     sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
                 }
 
