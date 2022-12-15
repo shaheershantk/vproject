@@ -18,8 +18,11 @@ pipeline {
         SONARSCANNER = 'sonarscanner'
         registryCredential = 'ecr:ap-south-1:awscreds'
         appRegistry = '812004463937.dkr.ecr.ap-south-1.amazonaws.com/vprofileappimg' //uri repo name created in ecr
+        cluster = 'vprostaging'
+        service = 'vproappstagesvc'
         vprofileRegistry = 'https://812004463937.dkr.ecr.ap-south-1.amazonaws.com'   //https without repo name for docker login
     }
+
 	
     stages{
         
@@ -74,6 +77,14 @@ pipeline {
                         dockerImage.push('latest')
                     }
                 }
+            }
+        }
+        stage('Deploying to ECS') {
+            steps {
+                withAWS(credentials: 'awscreds', region: 'ap-south-1'){
+                    sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
+                }
+
             }
         }
         stage('Show username and password') {
