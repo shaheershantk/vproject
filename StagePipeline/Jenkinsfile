@@ -91,7 +91,7 @@ pipeline {
         stage('Show username and password') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'shaheershan', passwordVariable: 'password', usernameVariable: 'user')]) {
-                  echo "Username is ${user} and password is ${password}" \\created cred shaheershan in jenkins
+                  echo "Username is ${user} and password is ${password}" //created cred shaheershan in jenkins
                 }
             }
         }
